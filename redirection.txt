@@ -1,0 +1,134 @@
+// Send output to file
+ls -l /usr/bin > ls-output.text
+
+// Create an empty file or clear/truncate an existing file
+// by using the redirect operator
+> out.txt
+
+// Append redirected output to a file
+ls -l >> here.txt
+
+// Redirect standard error
+// 2 is the file descriptor for standard error
+// A file descriptor is a reference to a file stream
+// Standard error is the same as file descriptor number 2
+// Standard input file descriptor is 0 
+// Standard output file descriptor is 1
+ls -l /bin/usr 2> ls-error.txt
+
+// You can also redirect standard output using standard output file descriptor like so:
+ls -l /usr/bin 1> my-bin.txt
+
+// Show both output and error in the same file
+// Here we perform two redictions
+// First we redirect output to the given file
+// Then we redirect standard error to standard output
+ls -l /bin/usr > ls-output.txt 2>&1
+
+// Redirect both output and error to a single file
+// For recent bash versions
+ls -l /bin/usr &> my-log.txt
+
+// Redirect but append both output and error to a single file
+ls -l /bin/usr &>> my-log.txt
+
+// Dispose off unwanted error messages
+// Redirect output to a special file called /dev/null
+ls -l /bin/usr 2> /dev/null
+
+// The cat command reads one or more files and copies it to standard output
+// You can use it to display files without paging
+// cat is short for concatenate
+cat here.txt
+cat here.txt ls-error.txt
+
+// You can redirect the output returned by cat to a file
+cat * > all.txt
+
+// Get from standard input to file
+// Use Ctrl+D at the end (or to save) then Ctrl+Z to exit 
+cat > from-bash.txt
+c
+// You can get read from one file and copy or append into another file
+// To overwrite use >
+cat ls-error.txt > here.txt
+
+// To append use >>
+cat ls-error.txt >> here.txt
+
+// Redirecting standard input from keyboard using <, same as only passing the file name instead
+cat < here.txt
+// Same as
+cat here.txt
+
+// Number output: -n
+// Append $ at line end: -e
+// Suppress blank lines: -s
+cat here2.txt -ens
+
+
+// Pipelines
+// Using the pipe operator "|" , the standard output of one cannot 
+// can be piped into the standard input of another command
+ls -l /usr/bin | less
+cat here2.txt | less
+
+
+> (redirection operator) and | (pipeline operator)
+> connects a command with a file while | connects output of one command
+with the input of a second command
+command1 > file1
+command1 > command2
+
+// Put several commands together into a pipeline
+// Use the following filters: 
+// sort: reorganize input and then output it
+// uniq: Remove duplicates from sorted list
+// cat -s: Suppress repeated empty output lines
+cat red.txt | sort | cat -s 
+// Redirect final out put to a file
+cat red.txt | sort | cat -s > red-org.txt
+
+// To simply read from file then sort before you output to stdout, use:
+cat red.txt | sort
+
+// Sort then identify and duplicates 
+cat here2.txt | sort | uniq -d
+
+
+// wc 
+// Print Line count, Word count and Byte count
+// If executed without arguments it accepts stdin
+wc all.txt
+out> 26  190 1255 all.txt
+// 26: line count
+// 190: word count
+// 1255: byte count (same as character count)
+
+// Print the number of unique lines in red.txt
+cat red.txt | sort | uniq | wc -l
+
+// Print the number of files and folders in a directory
+ls | wc -l
+
+// grep
+// Find patterns within files
+// Find all files that have pdf in the name
+ls | sort | uniq | grep pdf
+
+
+// head/tail
+// Head gives the first few lines of the input. Defaults to 10 lines
+head -n 2 lilian.txt
+// Tail gives the first few lines of the input. Defaults to 10 lines
+tail -n 5 lilian.txt
+
+// Keep monitoring a file's tail 
+tail -f pp.txt
+
+
+
+// tee
+// Read from stdin and send to both stdout and file.
+// Send output of ls to myls.txt and output of grep to mygrep.txt and show result to stdout as well
+// ls | tee myls.txt | grep red | tee mygrep.txt 

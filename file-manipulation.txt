@@ -1,0 +1,90 @@
+// File manipulation commands.
+// Playground lessons: TLCL Page 34
+--
+
+// Create directory
+mkdir playground
+
+// Create multiple directories
+mkdir dir1 dir2
+
+// Copy File
+cp /etc/passwd .
+
+// Copy while showing message about what is happening
+cp -v /etc/passwd .
+// Out> '/etc/passwd' -> './passwd'
+
+// Copy in interactive mode so you get a warning a confirmation request 
+// about any serious change
+cp -i /etc/passwd .
+
+// Rename
+mv passwd fun
+
+// Move to different directory
+mv fun dir1
+
+// Move entire directory dir1 to another directory dir2
+// If dir2 does not exist, dir1 will be renamed to dir2
+mv dir1 dir2
+
+// Move dir1 to working directory
+mv dir2/dir1 .
+
+// Create hard link fun-hard pointing to fun
+ln fun fun-hard
+// Response. 
+5518491 drwxrwxr-x 2 ssenyonjo ssenyonjo 4096 Maa 26 20:51 dir1
+5518492 drwxrwxr-x 2 ssenyonjo ssenyonjo 4096 Maa 26 20:51 dir2
+5537202 -rw-r--r-- 4 ssenyonjo ssenyonjo 2832 Maa 26 19:49 fun
+5537202 -rw-r--r-- 4 ssenyonjo ssenyonjo 2832 Maa 26 19:49 fun-hard
+// Both fun and fun-hard share the same inode number 5547202 
+// which means they are the same file
+
+
+// Create symbolic link to file in wd
+// NB: You can create symbolic links from GUI by holding Ctrl+Shift then dragging file to prefered destination
+ln -s fun fun-sym
+
+// Create a symbolic link to file in wd but put the symbolic link in a different directory
+// The symbolic link we create a text description of where the target file is relative to the symbolic link
+ln -s ../fun dir1/fun-sym
+
+// Create symbolic link using absolute pathname
+ln -s /home/ssenyonjo/Documents/playground/fun2 dir1/fun-sym-2
+
+// Creating symbolic links that reference directories
+ln -s dir1 dir1-sym
+
+// Delete symbolic link.
+// Its the link thats deleted, not the target file
+rm fun-sym
+
+// Delete directory and all of its contents
+rm -r dir1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

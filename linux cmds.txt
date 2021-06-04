@@ -1,0 +1,20 @@
+// change to home directory
+cd
+
+// change to username's home directory
+cd ssenyonjo
+
+// change to previous working directory
+cd -
+
+// list items in current directory
+// sort by modification datetime
+// reverse order of sort
+ls -lt --reverse
+
+// Change password
+passwd
+
+// Put more than one command on a line
+cd /usr; ls; cd -
+

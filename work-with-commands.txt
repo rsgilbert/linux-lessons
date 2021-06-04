@@ -1,0 +1,43 @@
+// Find out the type of command
+type cp
+
+// Display the location of a given executable
+which python
+which mv
+
+// Find help for shell builtins
+help cd
+
+// Display help information for executable programs
+mkdir --help
+
+// View documentation or man page for a program
+man ls
+man 5 passwd
+
+// search throw manpages based on a search word
+apropos shadow
+man -k shadow
+
+// Display a very brief description of a command
+whatis mkdir
+
+// Display a program's info entry. Alternative to man pages
+// Display a menu page with hyperlicks to each program contained
+// in the coreutils package
+info coreutils
+
+// To find out if a command is being used
+type test
+type hi
+
+// Create alias function
+alias mydesktop='cd ~/Desktop;ls;cd -;'
+alias ls='ls -l'
+
+
+// To remove an alias
+unalias mydesktop
+
+// To see all aliases defined 
+alias

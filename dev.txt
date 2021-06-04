@@ -1,0 +1,2 @@
+Make device node that behaves as /dev/null
+sudo mknod my_null c 1 3

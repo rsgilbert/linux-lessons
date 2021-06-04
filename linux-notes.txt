@@ -1,0 +1,9 @@
+### mv ###
+mv command: For moving files/directories.
+mv dir1 dir2 (dir2 exists)
+if dir2 exists, move dir1 into dir2. So no renaming. New path to file a.txt originally in dir1 is dir2/dir1/a.txt
+
+mv dir1 dir2 (dir2 doesnt exist)
+If dir2  does not exist, Create dir2 and move contents of dir1 into dir2. In other words rename dir1 title to dir2 title.
+If a.txt is originally in dir1, new path to a.txt after move is dir2/a.txt
+

@@ -1,0 +1,137 @@
+// Echo prints its text arguments to stdout
+echo this is love
+
+
+// Pathname expansion
+
+// *
+// Expands into the names of the files in the current wd
+
+// Print the files in wd (workind directory)
+echo *
+
+// More use of wildcard
+echo f*
+echo [[:upper]]*
+echo /usr/*/share
+echo /*/bin
+
+echo /*/*/bin
+echo */bin
+
+// Show all hidden files excluding . and ..
+echo .[!.]*
+
+// Tilde
+// Expands into the name of the home directory of the named user or current user
+echo ~
+echo ~ssenyonjo
+
+// Arithmetic
+echo $((9 + 2))
+
+// Brace expansion
+// Creates multiple text strings from a pattern containing braces
+echo Note{1,2,3}
+Out>Note1 Note2 Note3
+
+echo {1..5}\ years\ old
+Out>1 years old 2 years old 3 years old 4 years old 5 years old
+
+echo {01..10}
+Out>01 02 03 04 05 06 07 08 09 10
+
+echo {z..a}
+Out>z y x w v u t s r q p o n m l k j i h g f e d c b a
+
+echo {g..t}
+Out>g h i j k l m n o p q r s t
+
+echo img{a{1..10},c{1..10}}
+Out>imga1 imga2 imga3 imga4 imga5 imga6 imga7 imga8 imga9 imga10 imgc1 imgc2 imgc3 imgc4 imgc5 imgc6 imgc7 imgc8 imgc9 imgc10
+
+echo {a..c}-{1..5}
+Out>a-1 a-2 a-3 a-4 a-5 b-1 b-2 b-3 b-4 b-5 c-1 c-2 c-3 c-4 c-5
+
+mkdir numberplate-{A..D}-{01..05}
+
+
+// Parameter expansion
+// Reveals contents of variables
+// show user
+echo $USER
+
+//see a list of available variables
+printenv
+
+
+// Command Substitution
+// Get output of a command as an expansion
+echo $(ls)
+echo $(which cp)
+
+ls -l $(which cp)
+Out>-rwxr-xr-x 1 root root 153976 Seb  5  2019 /usr/bin/cp
+
+// Show file details of all files returned by ls
+file $(ls)
+
+// Command substitution in older bash versions using back-ticks
+ls -l `which cp`
+
+
+// Quoting
+// Double quotes
+// All special characters lose their special meaning except $, \ and `
+// Expansions suppressed:
+word-splitting, pathname expansion, tilde expansion, brace expansion
+// Expansions not suppressed, ie, still carried out even within double quotes
+parameter expansion, arithmetic expansion, command substition
+
+
+// Stop word-splitting using double quotes
+ls "three new words.txt"
+
+
+// Parater expansion, arithmetcic expansion and command subsititution 
+// still carried out within double quotes
+// The calendar is now shown over multiple lines because the newline characters are treated as such instead of as delimiters
+echo "$USER $((2+5)) $(cal)"
+>ssenyonjo 7      Juuni 2021       
+Sa Ba Lw Lw Lw Lw Lw  
+       1  2  3  4  5  
+ 6  7  8  9 10 11 12  
+13 14 15 16 17 18 19  
+20 21 22 23 24 25 26  
+27 28 29 30   
+
+// Show calendar with spaces and newlines
+echo "$(cal)"
+
+
+// Single quotes
+// Single quotes suppress all expansions
+echo '$(cal)'
+echo '$USER'
+
+// Esaping characters
+// We can quote a single character using backslash \
+echo "$USER has \$5 dollars"
+
+// Create a filename with special characters
+> bad\&filename\!.txt
+>Out>bad&filename!.txt
+
+> bad\&file\\name\!.txt
+>Out>bad&file\name!.txt
+
+
+// Escape sequences
+// backslash is used in a notation to represent special characters called control codes
+// Examples of escape sequences: \a: bell(alert), \b: backspace, \n, \r, \t, etc
+// Use -e on echo to enable interpretation of escape sequences. They will work even in single quotes
+sleep 5; echo -e "5 seconds over\a"
+echo $'Good\nNight'
+>Good
+Night
+

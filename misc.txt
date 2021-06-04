@@ -1,0 +1,6 @@
+// List files
+ls ~/Downloads -sSrh
+    -s size
+    -h human readable
+    -S sort by size
+    -r reverse order
