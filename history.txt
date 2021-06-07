@@ -1,0 +1,37 @@
+// Contents of history are stored in .bash_history
+// We can view them from cli like so:
+history
+
+
+// History expansion
+// Enter command in history based on its line numberplate
+// eg. suppose we had:
+// 1742  echo $USER
+// We run this same command by entering:
+!1742
+
+// Repeat last command
+!!
+
+// Repeat last history list item starting with string
+!string
+
+// Repeat last history list item containing string
+!?string
+
+// Search history list (Reverse incremental search)
+Ctrl+R
+
+// Record bash session to file including all the commands and their results as they
+// are entered
+script todays-shell-session.txt
+
+// Record / flush contents to file after every write / command entry
+script --flush
+
+// Stop and save(flush to file) recording
+exit
+
+
+
+

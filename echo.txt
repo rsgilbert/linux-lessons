@@ -93,7 +93,7 @@ parameter expansion, arithmetic expansion, command substition
 ls "three new words.txt"
 
 
-// Parater expansion, arithmetcic expansion and command subsititution 
+// Parameter expansion, arithmetcic expansion and command subsititution 
 // still carried out within double quotes
 // The calendar is now shown over multiple lines because the newline characters are treated as such instead of as delimiters
 echo "$USER $((2+5)) $(cal)"
@@ -125,6 +125,8 @@ echo "$USER has \$5 dollars"
 > bad\&file\\name\!.txt
 >Out>bad&file\name!.txt
 
+
+0704510871 -> 
 
 // Escape sequences
 // backslash is used in a notation to represent special characters called control codes
