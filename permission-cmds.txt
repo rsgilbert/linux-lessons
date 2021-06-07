@@ -1,0 +1,23 @@
+// Find out info about a file
+file dev.txt
+
+// Find information about my identity
+id
+
+// See all user acounts
+less /etc/passwd
+
+// See all groups
+less /etc/group
+
+// Note: Passwords are stored in /etc/shadow
+
+
+
+
+
+
+
+
+
+
