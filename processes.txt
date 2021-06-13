@@ -1,0 +1,109 @@
+// View processes
+// View processes associated with the current terminal session (snapshot of process activity)
+ps 
+
+// See all the processes we own regardless of what terminal they are controlled by
+ps x
+
+// Display processes belonging to each user 
+ps aux
+
+// View a continuousl updating display of processes listed in order of process activity
+top
+
+
+// ## Controlling processes
+// Politely ask a program to terminate  
+// Interrupt signal (INT)
+Ctrl+C 
+// Or 
+kill -s INT %1
+// Or
+kill -s SIGINT %1
+// Or (using signal number)
+kill -n 2 %1
+// Or
+kill -INT %1
+// Or 
+kill -2 %1
+
+// Run program xlogo from the foreground
+xlogo
+
+// Run program xlogo placing it in the background
+xlogo &
+
+// List jobs that have been launched from our terminal
+jobs
+
+// Return a process to the foreground
+// Lets suppose its job number (called jobspec) is 1
+fg %1
+
+// Stop a process without terminating it
+// Allows a foreground process to be moved to the background
+// Terminal Stop signal (TSTP)
+Ctrl + Z
+Or
+kill -s TSTP %1
+
+// Move stopped process to foreground
+fg %1
+
+// Move stopped process to background
+bg %1
+// Similar to
+kill -CONT %1
+
+// ## Signals 
+// kill is used to send signals
+// Terminate programs that need killing (using signals)
+// Terminate signal (TERM)
+kill 53073
+// Or
+kill -TERM 53073
+
+// Terminate program by specifying its jobspec (using signals)
+kill %1
+
+
+// Hungup signal. 
+// Identical to closing a terminal
+kill -s HUP %2
+
+// KILL signal
+// Termination of program is performed by kernel immediately. Program is not given time to cleanup after itself
+kill -s KILL 46431
+
+Or (using signal number)
+kill -n 9 46431
+
+// List signal numbers 
+kill -l
+
+// Stop (pause) a process
+// STOP signal is sent to the kernel so it can not be ignored
+kill -STOP 63866
+
+
+// Continue (resume) a process 
+kill -CONT 64866
+
+// Terminate program by asking it politely. Give it time to clean up 
+kill -TERM %1
+
+// Kill multiple processes
+kill %5 %6 %7
+
+// Or
+killall xlogo
+
+// See process tree 
+pstree
+
+// Snapshot of system resources usage
+vmstat
+// To get timely updates (in seconds intervals eg after every 4 seconds)
+vmstat 4
+
+
