@@ -1,0 +1,19 @@
+// Create a user using useradd
+// useradd is a low level utility. We can instead use adduser
+sudo useradd low_user
+
+// Find out which users have home directories
+ls /home
+
+// Find out name of currently logged in user
+whoami
+
+// Delete user 
+sudo deluser low_user
+
+// If an error about user being used by a process, first run
+sudo killall -u gil
+
+// Delete user including their home directory
+sudo deluser --remove-home gil
+

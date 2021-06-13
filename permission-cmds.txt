@@ -11,13 +11,128 @@ less /etc/passwd
 less /etc/group
 
 // Note: Passwords are stored in /etc/shadow
+file /etc/shadow
+
+// ## File mode ##
+## change file mode bits
+
+## Method 1: Octal number representation of the bit 
+## pattern for the new mode bits
+
+// Add all permissions to owner
+chmod 700 hi.txt
+
+// Add  read and write permissions to owner only
+chmod 600 hi.txt
+
+// Read and execute to owner
+chmod 500 hi.txt
+
+// Read only to owner
+chmod 400 hi.txt
+
+// No permissions to owner
+chmod 000 hi.txt
+
+// Assign only write permissions
+chmod 200 hi.txt
+
+// Add all permissions to user and others
+chmod 707 hi.txt
 
 
+## Method 2: Symbolic representation of changes to make
+u -> user, g -> group, o -> others, a -> all
++ -> add, - -> remove, = -> only
+
+// Remove all permissions to owner
+chmod u= hi.txt
+Or:
+chmod u-rwx hi.txt
+
+// Add read to group
+chmod g+r hi.txt
+
+// Add rwx to user and group
+chmod og+rwx hi.txt
+
+// Add write to other (world)
+chmod o+w hi.txt
+
+// Remove write from group and other
+chmod og-w hi.txt
+
+// Set all to have only read 
+chmod a=r hi.txt
+
+// Add write and execute to group and also add execute to others
+chmod g+xw,o+x hi.txt
+
+// Permissions on directory 
+// Disable seing details about files in directory d 
+// ls d can work but ls -l can not (Read but no execute)
+// You wont be able to change permissions of directory files (chmod u+r d/a.txt wont work)
+chmod 600 d 
+
+// Disable both ls and ls -l (No read and no execute)
+// Moreover, this will also disable modifying file mode of files in d
+chmod u-rx d
+
+// Allow reading specific files in directory but you can not view details about 
+// the entire directory list
+// ls -l d/a.txt will work but ls -l will not
+// cat d/a.txt will work
+// chmod d/a.txt will work
+chmod u-r,u+x d
+
+// Disable renaming (moving) file(s) in directory
+// mv d/a.txt d/k.txt will not work
+// Also disables removing file(s) in directory
+// rm d/a.txt will not work
+// Disable creating files in directory
+// > d/me.txt will not work
+chmod u-w d
 
 
+## umask
+## Set default permissions
+// Specify which file mode bits you want to be turned off (0) when 
+// you create a new file. Those file mode bits you want should be specified as 0 in the umask
+// For examle: umask 7777 specifies that all file mode bits are 0 at the start
 
+// Current value of umask (default is 0002)
+umask
 
+// Change umask
+// 0000 Turns off umask 
+// Makes new files created world-writable
+// When mask is 0002, the last 2 affects the world permissions. Since 2 is 010, it unsets default w on world to 0. The default is 1 for w, so unset and you get 0 for w. If its already 0 like for x its left as 0
+umask 0000
 
+// use unmask of 7
+// Default original file mode: --- rw- rw- rw-
+// Note, umask 0770 is the same as umask 770
+umask 0770
+> y.txt
+ls -l y.txt
+out> -------rw- 1 ssenyonjo ssenyonjo 0 Juu  8 06:34 y.txt
+
+// Set special permissions
+// Assign setuid to a program
+// When a program's execute permissions is changed from
+// x to s, the program will run with the permissions of the file owner rather than 
+// the permissions of the person executing the program.
+// If the file owner is superuser, then the program will run with superuser priviledges.
+// The execute permissions on the user(owner) turns from x or - to s. File gets highlighted on ls
+chmod u+s hi.txt
+
+// Assign setguid to a directory
+// The execute permissions on the group turn from x or - to s. File gets highlighted on ls
+chmod g+s d 
+
+// Assign sticky bit to a directory
+// The execute permissions of world turn from - or x to t. File gets highlighted on ls
+chmod +t a2
 
 
 

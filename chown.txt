@@ -1,0 +1,31 @@
+// ## chown - Change file owner and group
+
+
+// First we copy file to another users home directory
+sudo cp y.txt ~gil
+
+// The copied file is owner by su
+ls -l ~gil
+out> -rwxr-xr-- 1 root root 0 Juu  9 08:59 y.txt
+
+// Change ownership of file ~gil/y.txt to gil.
+// Make gil the file owner and gil's login group the group owner
+sudo chown gil: ~gil/y.txt
+
+// In folder playground
+// Change file ownership of folder a2 from ssenyonjo to gil
+sudo chown gil a2
+
+// Change group of file foo.txt from ssenyonjo to root
+sudo chown :root foo.txt
+
+// We can also change group ownership using chgrp
+sudo chgrp gil p.txt
+
+// Change both file ownership and group ownership
+sudo chown ssenyonjo:ssenyonjo a2
+
+// Change ownership of all files and display verbose information of the changes
+sudo chown --verbose ssenyonjo:ssenyonjo * 
+
+

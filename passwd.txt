@@ -1,0 +1,13 @@
+// Change current user's passwd
+passwd
+
+// To change a passwd bypassing entering old passwords, confirming strength guidelines etc.
+sudo passwd
+sudo passwd gil
+
+// See passwd status
+passwd --status
+
+// Report passwd status on all accounts 
+passwd -as
+

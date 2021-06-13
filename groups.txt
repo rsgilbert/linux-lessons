@@ -1,0 +1,94 @@
+// Some group related cmds
+passwd, gpasswd,groupadd, groupdel, groupmod, useradd,
+userdel
+
+// Create a group
+// Adds an entry to /etc/group and /etc/gshadow
+sudo groupadd simplegroup
+
+// Or (preferred for ease of use)
+sudo addgroup dev
+
+// List all the groups 
+// getent means get entries from name service switch librariesq
+getent group
+Or 
+less /etc/group
+
+// Get information about one group
+getent group simplegroup 
+
+// Print information about a specified user and its groups
+id gil
+// Print only the name and all groups
+id -nG gil
+
+// Append (-a) a user to a group (-G)
+// Note: If the user being added is currently logged in,
+// they will have to logout and login again for changes on their account to take effect, that is, so they can use the group permissions
+// By administering a user
+sudo usermod -aG simplegroup gil
+// Or by administering a group
+sudo gpasswd -a gil simplegroup
+
+
+// Append user to multiple groups
+sudo usermod -aG complexgroup,ultragroup ssenyonjo
+
+// gpasswd - Group administration 
+// Remove user from a group
+sudo gpasswd -d gil simplegroup
+
+// Add user to a group
+sudo gpasswd -a ssenyonjo simplegroup
+
+// Give a user sudo privileges 
+sudo gpasswd -a gil sudo 
+
+// Change the name of a group
+sudo groupmod -n simpgrp simplegroup
+
+// Delete a group
+// Note, to delete a primary group you must first delete the user of that primary group
+sudo groupdel complexgroup
+
+// Or 
+sudo delgroup dev
+
+// Change group password
+sudo groupmod -p ultra ultragroup
+
+## Permissions music scenario
+
+// Create music group
+sudo groupadd musicgrp
+
+// Add users to music group
+sudo gpasswd -a gil musicgrp
+sudo gpasswd -a ssenyonjo musicgrp
+
+// Create directory for music files 
+sudo mkdir /usr/local/share/MyMusic
+
+// Show information about created directory
+ls -ld /usr/local/share/MyMusic
+out>drwxr-xr-x 2 root root 4096 Juu 10 06:24 /usr/local/share/MyMusic
+
+// Change group ownership and permissions to allow writing
+sudo chown :musicgrp /usr/local/share/MyMusic
+
+// Give write permissions to the group
+sudo chmod g+w /usr/local/share/MyMusic
+
+// setgit bit on MyMusic directory so that files created within the directory
+// have a group ownership equal to the owner of the directory rather than the real user's primary group
+// All subdirectories that will be created and files that will be created within the directory and subdirectories will also have g+s file mode, that is, their group will be musicgrp
+sudo chmod g+s /usr/local/share/MyMusic
+
+
+
+
+
+
+
+

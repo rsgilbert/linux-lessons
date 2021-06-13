@@ -1,0 +1,34 @@
+// ## su
+// Start a shell as another user
+// Login to root is disabled by default so we will have to prepend with sudo
+// so we can be granted superuser priviledges
+sudo su -
+// Or
+sudo su -l
+
+
+Run one command as superuser
+sudo su -c 'ls -l /root'
+
+// ## sudo 
+// Allow an ordinary user execute commands as a different user(usually superuser) in a very controlled way.
+// The ordinary user authenticates using their own password and not the password of the superuser
+sudo ls /root
+
+// To see what priviledges are granted by sudo
+sudo -l 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
